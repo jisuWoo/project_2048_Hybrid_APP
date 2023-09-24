@@ -1,12 +1,92 @@
-#all{
+/* Reset some default styles */
+body, div, button, input {
     margin: 0;
     padding: 0;
-}#d1{
-    background-color: bisque;
+    border: none;
+    outline: none;
+}
+
+/* Set a background color for the entire page */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Style the container */
+#all {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+/* Style the login form */
+#d1 {
+    text-align: center;
+    height: 100px;
+}
+#input {
+    margin-left: 20px;
+    width: 82%;
     padding: 10px;
-}#result{
-    padding: 30px;
-}#result img{
-    width: 10%;
-    height: 10%;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+#loginbtn, #logoutbtn {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#logoutbtn {
+    background-color: #DC3545;
+    float: right;
+}
+
+#result_txt{
+    margin: 10px;
+}
+
+/* Style the result container */
+#result {
+    margin-top: 20px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#result img{
+    width: 30%;
+    height: 30%;
+}
+
+/* Style the buttons in d2 */
+#d2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    margin: 5px;
+}
+
+/* Style d3 */
+#d3 {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
 }
