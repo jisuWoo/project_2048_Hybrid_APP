@@ -45,13 +45,13 @@ body {
     cursor: pointer;
 }
 
+#loginbtn {
+    float: left;
+}
+
 #logoutbtn {
     background-color: #DC3545;
     float: right;
-}
-
-#result_txt{
-    margin: 10px;
 }
 
 /* Style the result container */
@@ -59,9 +59,14 @@ body {
     margin-top: 20px;
     font-weight: bold;
     text-align: center;
+    position: relative;
+    float: left;
 }
 
 #result img{
+    position: relative;
+    float: left;
+    margin: 10px;
     width: 30%;
     height: 30%;
 }

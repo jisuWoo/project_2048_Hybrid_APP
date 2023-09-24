@@ -4,14 +4,16 @@ window.onload = function(){
 
     loginbtn.addEventListener('click', function(){
         var inputvalue = document.getElementById("input").value;
-        if(inputvalue == "d"){
+        if(inputvalue == "ID"){
             loginbtn.style.display = "none";
             logoutbtn.style.display = "block";
 
-            result_txt.innerText = "이은석";
+            result.textContent = " 닉네임 : 이은석 ";
             var img = document.createElement("img");
             img.src = "https://vr.yuhan.ac.kr/bbs/file/getImageDirect.do?subFilePath=professor&fileName=professor_file_1_49039211373641942.JPG";
             result.appendChild(img);
+        }else{
+            alert(" 'ID'을 입력해주세요. ")
         }
     });
     logoutbtn.addEventListener('click', function(){
