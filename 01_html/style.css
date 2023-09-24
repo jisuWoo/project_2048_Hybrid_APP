@@ -1,0 +1,12 @@
+#all{
+    margin: 0;
+    padding: 0;
+}#d1{
+    background-color: bisque;
+    padding: 10px;
+}#result{
+    padding: 30px;
+}#result img{
+    width: 10%;
+    height: 10%;
+}
