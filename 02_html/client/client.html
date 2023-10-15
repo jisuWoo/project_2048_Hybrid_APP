@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id = "get">html</button>
+    <p id = "res"></p>
+</body>
+<script>
+     var res = document.getElementById("res");
+     var apiUri = "http://localhost:3000/hi";
+     var button = document.getElementById("get").addEventListener("click",function(){
+        fetch(apiUri)
+            .then(function(response) {
+                return response.text(); 
+            })
+            .then(function(data) {
+                res.textContent = data;
+            })
+     })
+</script>
+</html>
