@@ -24,8 +24,8 @@ db.serialize(() => {
     db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT)");
 });
 
-db.serialize(() => {
-    db.run("CREATE TABLE IF NOT EXISTS rankings (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, score INTEGER)");
+db2.serialize(() => {
+    db2.run("CREATE TABLE IF NOT EXISTS rankings (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, score INTEGER)");
 });
 
 app.use(bodyParser.json());
