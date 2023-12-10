@@ -4,8 +4,8 @@ const CELL_SIZE = 15
 const CELL_GAP = 2
 
 
-let selectedPlayer = localStorage.getItem('selectedPlayer');
-console.log(selectedPlayer);
+let selectedPlayers = selectedPlayer;
+console.log(selectedPlayers);
 
 class Player {
   score = 0
@@ -221,10 +221,10 @@ class Tile {
         this.color = "white";
         break;
       case "Player1":
-        this.color = "yellow";
+        this.color = "#ffc0cb";
         break;
       case "Player2":
-          this.color = "blue";
+          this.color = "#5cffd1";
           break;
       // 다른 상태에 대한 처리 추가
     }
@@ -353,9 +353,11 @@ grid.cells.forEach(cell => cell.mergeTiles());
 
   if (!canMoveUp() && !canMoveDown() && !canMoveLeft() && !canMoveRight()) {
     newTile.waitForTransition(true).then(() => {
-      alert("You lose");
+        alert("Game over");
+        StatusValue = 2;
+        statusloop();
+        gameover(selectedPlayer);
     });
-    return;
   }
 
   setupInput();
@@ -376,7 +378,7 @@ async function gameover(selectedPlayer) {
               'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-              username: "test",  // 실제 유저 이름 또는 식별자로 변경
+              username: selectedPlayer,  // 실제 유저 이름 또는 식별자로 변경
               score: score,
           }),
       });
