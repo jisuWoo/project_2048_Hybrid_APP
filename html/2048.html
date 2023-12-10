@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/2048.css">
 </head>
 <body>
-    <div id="app">
+    <div id="login_page">
         <h1>Login</h1>
         <form id="loginForm">
             <label for="username">Username:</label>
@@ -19,8 +19,28 @@
             <p id="message"></p>
         </form>
     </div>
-
+    <!-- 게임 페이지 -->
+    <div id = "game_page">
+        <div id="game-board"></div>
+        <div id="current-turn">Turn: <span id="turn-indicator">Player 1</span></div>
+        <div id="player-scores">score: <span id="score-indicator">0</span></div>
+    </div>
+    <div id="selection_page">
+        <div id="player1-box" class="player-box" onclick="selectPlayer('Player1')">Player 1</div>
+        <div id="player2-box" class="player-box" onclick="selectPlayer('Player2')">Player 2</div>
+    </div>
+    <div id="ranking_page">
+        <h1>Rankings</h1>
+        <ul id="rankings-list"></ul>
+        <div id="exitbutton" class="player-box" onclick="changestaus()">exit</div>
+    </div>
     <script>
+        const login_page = document.getElementById('login_page');
+        const game_page = document.getElementById('game_page');
+        const select_page = document.getElementById('selection_page');
+        const ranking_page = document.getElementById('ranking_page');
+        var StatusValue = 0;
+        
         async function login() {
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
@@ -37,7 +57,8 @@
                 const data = await response.json();
 
                 if (data.success) {
-                    document.getElementById('message').textContent = data.message;
+                    StatusValue = 4;
+                    //document.getElementById('message').textContent = data.message;
                 } else {
                     document.getElementById('message').textContent = data.message;
                 }
@@ -45,6 +66,89 @@
                 console.error('Error during login:', error);
             }
         }
+
+        setInterval(statusloop,1000/20);
+
+        function statusloop(){
+            const bodyElement = document.body;
+            switch(StatusValue){
+
+                // 0 : 로그인 화면
+                // 1 : 게임 진입 
+                // 2 : 랭킹
+                // 4 : 색선택 
+                // 대략적인 구조
+                case 0:
+                    login_page.style.display = 'block';
+                    game_page.style.display = 'none';
+                    select_page.style.display = 'none';
+                    ranking_page.style.display = 'none';
+                    bodyElement.style.backgroundColor = "#FFD84F";
+                    break;
+                case 1:
+                    login_page.style.display = 'none';
+                    game_page.style.display = 'block';
+                    select_page.style.display = 'none';
+                    ranking_page.style.display = 'none';
+                    bodyElement.style.backgroundColor = "#333";
+                    bodyElement.style.fontSize = "7.5vmin";
+                    break;
+                case 2:
+                    login_page.style.display = 'none';
+                    game_page.style.display = 'none';
+                    select_page.style.display = 'none';
+                    ranking_page.style.display = 'block';
+                    bodyElement.style.backgroundColor = "white";
+                    bodyElement.style.fontSize = "2.5vmin";
+                    rank();
+                    break;
+                case 4:
+                    login_page.style.display = 'none';
+                    game_page.style.display = 'none';
+                    select_page.style.display = 'block';
+                    ranking_page.style.display = 'none';
+                    bodyElement.style.backgroundColor = "#333";
+                    bodyElement.style.fontSize = "7.5vmin";
+                    break;
+            }
+        }
+        function selectPlayer(player) {
+            // 선택된 플레이어를 저장
+            localStorage.setItem('selectedPlayer', player);
+            StatusValue = 1;
+        }
+        function changestaus(){
+            restartGame();
+            StatusValue = 4;
+        }
+        function displayRankings(rankings) {
+        const rankingsList = document.getElementById('rankings-list');
+        // 기존 목록 비우기
+        rankingsList.innerHTML = "";
+
+        // 랭킹 추가
+        rankings.forEach((ranking, index) => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${index + 1}. ${ranking.username}: ${ranking.score}`;
+            rankingsList.appendChild(listItem);
+        });
+        }
+        async function rank() {
+            fetch('/api/getRankings')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    displayRankings(data.rankings);
+                } else {
+                    console.error('Error fetching rankings');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
     </script>
+    <!-- 2048 -->
+    <script src="./public/main.js"></script>
 </body>
 </html>

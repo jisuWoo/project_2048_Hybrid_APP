@@ -49,3 +49,93 @@ button:hover {
     margin-top: 16px;
     color: red;
 }
+
+
+/* 이거 2048 css */
+*, *::before, *::after {
+    box-sizing: border-box;
+    font-family: Arial;
+  }
+  
+  #game-board {
+    display: grid;
+    grid-template-columns: repeat(var(--grid-size), var(--cell-size));
+    grid-template-rows: repeat(var(--grid-size), var(--cell-size));
+    background-color: #CCC;
+    gap: var(--cell-gap);
+    border-radius: 1vmin;
+    padding: var(--cell-gap);
+    position: relative;
+  }
+  
+  #current-turn {
+    position: absolute;
+    top: 30px; /* 위로 이동 */
+    left: 50%;
+    transform: translateX(-50%); /* 가로 방향 가운데 정렬 */
+    color: white;
+    font-size: 4vmin; /* 원하는 크기로 조절 */
+  }
+
+  #player-scores { /* 추가된 부분: 스코어를 표시할 위치 */
+    position: absolute;
+    top: 60px; /* 위로 이동 */
+    left: 50%;
+    transform: translateX(-50%); /* 가로 방향 가운데 정렬 */
+    color: white;
+    font-size: 3vmin; /* 원하는 크기로 조절 */
+  }
+
+  .cell {
+    background-color: #AAA;
+    border-radius: 1vmin;
+  }
+  
+  .tile {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    /* background-color: red; */
+    border-radius: 1vmin;
+    top: calc(var(--y) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    left: calc(var(--x) * (var(--cell-size) + var(--cell-gap)) + var(--cell-gap));
+    font-weight: bold;
+    background-color: hsl(60, 100%, 50%);
+    color: hsl(200, 25%, var(--text-lightness));
+    animation: show 200ms ease-in-out;
+    transition: 100ms ease-in-out;
+  }
+  
+  @keyframes show {
+    0% {
+      opacity: .5;
+      transform: scale(0);
+    }
+  }
+
+/* selct 화면 css */
+#player-selection {
+  display: flex;
+  gap: 20px;
+}
+
+.player-box {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 2vmin;
+}
+
+#player1-box {
+  background-color: yellow;
+}
+
+#player2-box {
+  background-color: blue;
+}
